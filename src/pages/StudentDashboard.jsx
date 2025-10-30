@@ -71,7 +71,9 @@ function StudentDashboard() {
                     <div className="space-y-4">
                       <div>
                         <h3 className="text-lg font-semibold text-gray-900">{exam.title}</h3>
-                        <p className="text-gray-600 text-sm mt-1">{exam.description}</p>
+                        <p className="text-gray-600 text-sm mt-1">
+                          {exam.description ? exam.description.slice(0, 200) + (exam.description.length > 200 ? "..." : "") : ""}
+                        </p>
                       </div>
 
                       <div className="space-y-2 text-sm text-gray-600">

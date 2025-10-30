@@ -54,7 +54,7 @@ const StudentReportView = ({ users = [], loading = false }) => {
                     <td className="py-3 px-4 text-center">{user.email}</td>
                     <td className="py-3 px-4 text-center">{user.domain}</td>
                     <td className="py-3 px-4 text-center">{user.examTitle}</td>
-                    <td className="py-3 px-4 text-center">{user.score}</td>
+                    <td className="py-3 px-4 text-center">{user.score}/50</td>
                   </tr>
                 ))}
               </tbody>
