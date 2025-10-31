@@ -6,7 +6,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
-  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 function Login() {
   const [showPassword, setShowPassword] = useState(false);
@@ -29,8 +29,9 @@ function Login() {
       const res = await axios.post(`${API_BASE_URL}/api/auth/login`, values);
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("userId", res.data.user.id);
+      localStorage.setItem("domain", res.data.user.domain);
       toast.success("Login successful", { duration: 3000 });
-      navigate(`/student/dashboard/${res.data.user.id}`);
+        navigate(`/student/dashboard/${res.data.user.domain}/${res.data.user.id}`);
     } catch (error) {
       if (error.response && error.response.data) {
         toast.error(error.response.data.message);

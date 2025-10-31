@@ -39,8 +39,8 @@ function App() {
 
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/student/dashboard/:id" element={<StudentDashboard />} />
-        <Route path="/exam/:Id" element={<ExamPage />} />
+        <Route path="/student/dashboard/:doamin/:id" element={<StudentDashboard />} />
+        <Route path="/exam/:domain/:Id" element={<ExamPage />} />
         <Route path="submitexam" element={<Submit />} />
 
         <Route path="/admin/login" element={<Adminloginpage />} />

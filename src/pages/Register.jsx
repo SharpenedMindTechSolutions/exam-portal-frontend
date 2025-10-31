@@ -5,7 +5,7 @@ import { User, Mail, Lock, Eye, EyeOff, BookOpen } from 'lucide-react';
 import toast, { Toaster } from 'react-hot-toast';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 function Register() {
   const [showPassword, setShowPassword] = useState(false);

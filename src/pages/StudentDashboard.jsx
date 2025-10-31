@@ -18,7 +18,7 @@ function StudentDashboard() {
         return;
       }
       try {
-        const res = await axios.get(`${API_BASE_URL}/api/exam/get-exam`);
+        const res = await axios.get(`${API_BASE_URL}/api/exam/get-exam/${localStorage.getItem("domain")}`);
         setExams(res.data);
       } catch (error) {
         console.error("Error fetching exams:", error);
@@ -39,19 +39,46 @@ function StudentDashboard() {
             <h1 className="text-3xl font-bold text-gray-900 mb-1">Student Dashboard</h1>
             <p className="text-gray-600">Welcome to your exam portal. Choose an exam to get started.</p>
           </div>
-          <button
-            onClick={() => {
-              localStorage.removeItem("token");
-              localStorage.removeItem("examId");
-              localStorage.removeItem("malpracticeCount")
-              localStorage.removeItem("userId")
-              window.location.href = "/";
-            }}
-            className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg font-medium transition-all duration-200"
-          >
-            Logout
-          </button>
+
+          <div className="flex items-center gap-4">
+            {/* 🧑‍🎓 User Icon with ID */}
+            <div className="flex items-center gap-2 bg-blue-50 px-3 py-1 rounded-full shadow-sm border border-blue-200">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-6 h-6 text-blue-600"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0zM4.5 20.25a8.25 8.25 0 0 1 15 0"
+                />
+              </svg>
+              <span className="text-blue-700 font-semibold">
+                ID: {localStorage.getItem("userId")?.slice(0, 10).toUpperCase()}
+              </span>
+            </div>
+
+            {/* 🚪 Logout Button */}
+            <button
+              onClick={() => {
+                localStorage.removeItem("token");
+                localStorage.removeItem("examId");
+                localStorage.removeItem("malpracticeCount");
+                localStorage.removeItem("userId");
+                localStorage.removeItem("domain");
+                window.location.href = "/";
+              }}
+              className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-full font-medium transition-all duration-200"
+            >
+              Logout
+            </button>
+          </div>
         </div>
+
 
         {/* Loading State */}
         {loading ? (
@@ -70,8 +97,11 @@ function StudentDashboard() {
                   >
                     <div className="space-y-4">
                       <div>
-                        <h3 className="text-lg font-semibold text-gray-900">{exam.title}</h3>
-                        <p className="text-gray-600 text-sm mt-1">
+                        <h3 className="text-lg font-semibold text-gray-900 mb-3">{exam.title}</h3>
+                        <span className="px-3 py-1 text-sm font-semibold text-white bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full shadow-md">
+                          {exam.domain}
+                        </span>
+                        <p className="text-gray-600 text-sm mt-2">
                           {exam.description ? exam.description.slice(0, 200) + (exam.description.length > 200 ? "..." : "") : ""}
                         </p>
                       </div>
@@ -92,7 +122,7 @@ function StudentDashboard() {
                       </div>
 
                       <Link
-                        to={`/exam/${exam._id}`}
+                        to={`/exam/4${exam.domain}/${exam._id}`}
                         className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white py-3 px-4 rounded-lg font-medium transition-all duration-200 flex items-center justify-center space-x-2"
                       >
                         <Play className="w-4 h-4" />

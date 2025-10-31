@@ -23,6 +23,7 @@ const AdminDashboard = () => {
         try {
           const res = await axios.get(`${API_BASE_URL}/api/admin/results`);
           setUsers(res.data);
+          console.log("Fetched users:", res.data);
         } catch (err) {
           console.error("Error fetching data:", err);
         }
